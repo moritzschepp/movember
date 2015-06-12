@@ -1,0 +1,67 @@
+<div ng-controller="users_controller">
+
+  <h1>Users</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <form>
+        <div class="control-group">
+          <label for="search_terms">Search</label>
+          <input 
+            type="text" 
+            name="search_terms" 
+            class="form-control" 
+            ng-model="search_terms"
+            placeholder="Start typing to find or create users"
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="spacer-md-1"></div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div ng-hide="!users() || users().length > 0">
+        User not found. 
+        <a href="<%= new_user_path %>?user%5Bemail%5D={{search_terms_to_email()}}">
+          Create user 
+          <strong ng-bind="search_terms_to_email()"></strong>?
+        </a>
+      </div>
+
+      <table class="table table-condensed" ng-show="!users() || users().length > 0">
+        <thead>
+          <th>Email</th>
+          <th class="text-right">Amount</th>
+          <th class="hidden-xs">Cart</th>
+          <th class="hidden-xs">Admin</th>
+          <th class="hidden-xs hidden-sm">Auth link</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in users()">
+            <td>
+              <a href="{{user.edit_url}}" ng-bind="user.email"></a>
+            </td>
+            <td ng-bind="user.amount | currency:'<%= app_config['currency'] %> '" class="text-right"></td>
+            <td class="hidden-xs">
+              <div ng-repeat="(key, data) in user.cart" ng-show="data.amount > 0">
+                <span ng-bind="config().goods[key].plural_name"></span>:
+                <strong ng-bind="data.amount"></strong>
+              </div>
+            </td>
+            <td ng-bind="user.admin | yesno" class="hidden-xs"></td>
+            <td class="hidden-xs hidden-sm">
+              <a href="{{user.auth_url}}">login as this user</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

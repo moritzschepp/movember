@@ -1,0 +1,35 @@
+<%= form_for @feature do |f| %>
+  <% if @feature.errors.any? %>
+    <div class="alert alert-danger">
+      <% @feature.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :name, :class => "control-label" %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, :class => "control-label" %>
+    <%= f.text_area :description, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :picture, :class => "control-label" %>
+    <%= f.file_field :picture, :class => "form-control" %>
+  </div>
+
+  <%= f.submit "Save", :class => "btn btn-primary" %>
+
+  <% unless @feature.new_record? %>
+    <%= link_to "Delete feature", feature_path(@feature),
+      :class => "btn btn-primary",
+      "data-method" => "delete",
+      "data-confirm" => "Are you sure? This will also nullify the feature's votes"
+    %>
+  <% end %>
+
+<% end %>

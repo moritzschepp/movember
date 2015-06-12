@@ -1,0 +1,25 @@
+app_title: "IST Movember 2013"
+
+starts_at: "2012-10-25 00:00:00"
+ends_at: "2012-11-05 23:59:59"
+
+currency: "€"
+goal: 1000.0
+
+mail:
+  default_domain: ist.ac.at
+  from_address: movember@ist.ac.at
+
+goods:
+  vote:
+    name: Vote
+    plural_name: Votes
+    price: 1.0
+  t_shirt:
+    name: IST Movember T-Shirt
+    plural_name: IST Movember T-Shirts
+    price: 20.0
+    url: http://pics
+
+sample_pics_dir: "/path/to/some/pics"
+user_import_file: "/path/to/users.json"

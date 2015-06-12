@@ -1,0 +1,23 @@
+<h1> All votes</h1>
+
+<div class="movember-grid">
+  <% @votes.each do |items, amount| %>
+    <% if @people[items.last] && @features[items.first] %>
+      <div class="movember-tile">
+        <div class="movember-tile-inner light">
+          <img src="<%= @people[items.last].picture.url(:preview) %>">
+          <br />
+          <img src="<%= @features[items.first].picture.url(:preview) %>">
+        </div>
+        <div class="text-center">
+          <em><%= @people[items.last].display_name %></em>
+        </div>
+        <div class="text-center">
+          <strong><%= amount %> Votes</strong>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="clearfix"></div>
+</div>

@@ -1,0 +1,33 @@
+<h1 class="pull-left">People</h1>
+
+<div class="pull-right movember-button-bar">
+  <%= mdv_button 'Add a new person', new_person_path %>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="movember-grid">
+  <% @people.each do |person| %>
+    <div class="movember-tile">
+      <div class="movember-tile-inner">
+        <a href="<%= edit_person_path(person) %>">
+          <img src="<%= person.picture.url(:preview) %>">
+        </a>
+      </div>
+      <div class="text-center">
+        <em><%= person.display_name %></em>
+      </div>
+      <div class="text-center">
+        <!-- a
+          href="<%= person_url(person) %>" 
+          data-method="delete"
+          class="btn btn-success btn-xs"
+        >
+          delete
+        </a -->
+      </div>
+    </div>
+  <% end %>
+
+  <div class="clearfix"></div>
+</div>

@@ -1,0 +1,21 @@
+Dear Friend of mISTache,
+
+<% if @user.cast_randomly && @user.cast_randomly != "0" %>
+we are happy to see that you want to support our cause. This is why we would 
+like to thank you for your donation. Your votes have been randomly distributed
+among the available candidates.
+<% else %>
+we are happy to see that you want to support our cause. This is why we would 
+like to thank you for your donation. In order to vote for your favorite 
+mustache, please follow this link
+
+<%= @url %>
+<% end %>
+
+<% if @user.admin? %>
+You have been granted admin access to our mISTache app. You may login with
+your email address and password "<%= @user.password %>"
+<% end %>
+
+Kind regards,
+your mISTache Team

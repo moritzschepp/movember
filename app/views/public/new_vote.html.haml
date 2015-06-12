@@ -1,0 +1,44 @@
+.container
+  .hero-unit
+    %h1 Vote now!
+    Just select a person and some facial hair. Then click on the "vote" button
+    to vote for this combination!
+    
+.container.voting
+    
+  .people
+    %h2 Select who it shall be
+    - Person.order('first_name ASC, last_name ASC').in_groups_of(4, false).each do |people|
+      .row
+        - people.each do |person|
+          .span3.person{'data-id' => person.id}
+            .glower
+              %h4= person.display_name
+              = image_tag person.picture.url(:showcase), :class => 'img-rounded'
+  
+  .features
+    %h2 What would you like to see on him
+    - Feature.order('name ASC').in_groups_of(3, false).each do |features|
+      .row
+        - features.each do |feature|
+          .span4.feature{'data-id' => feature.id}
+            .glower
+              %h4= feature.name
+              = image_tag feature.picture.url(:showcase), :class => 'img-rounded'
+  
+  
+  .container.commands
+    = form_tag '/vote', :class => 'vote' do
+      = hidden_field_tag :feature_id
+      = hidden_field_tag :person_id
+      %input.btn.btn-primary{:type => 'submit', :value => 'Vote'}
+    
+.modal.hide.fade.thanks
+  .modal-header
+    %button.close{:type => 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+    %h3 Thank you for your vote
+  .modal-body
+    %p
+      Come back at the end of the voting period to see what most people voted for!
+  .modal-footer
+    %a.btn.btn-primary.back-to-root{:href => '#'} Back to the main page

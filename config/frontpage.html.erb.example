@@ -1,0 +1,56 @@
+<div class="row">
+  
+  <div class="col-md-2 hidden-xs hidden-sm">
+    <div class="teaser"><img src="/assets/typo_09.gif"></div>
+  </div>
+  <div class="col-md-7 movember-text">
+    <h1>Donec aliquam vehicula efficitur</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis nibh sit amet lacus congue condimentum a imperdiet elit. Proin aliquam luctus erat, quis convallis quam bibendum in. Nunc a magna et tellus dapibus feugiat. Donec et risus augue. Quisque rhoncus in sapien ac fermentum. Aenean at nulla gravida lorem imperdiet tempus quis sed urna. Quisque elementum vel erat ut maximus. Integer rhoncus id enim sit amet condimentum. Vivamus id iaculis dui. Nullam non dapibus arcu. Nam congue neque quis scelerisque vehicula.
+    </p>
+
+    <p>
+Nulla et dictum risus. Nulla dolor ex, tempus sit amet est at, tempus laoreet purus. Integer hendrerit, felis vitae ullamcorper aliquet, mauris diam maximus nulla, eu congue orci nisl ut tellus. Fusce porttitor ac turpis vel commodo. Donec aliquam vehicula efficitur. Ut augue purus, finibus cursus massa a, euismod bibendum mi. Nulla fermentum scelerisque orci, ac faucibus diam dignissim id. Aliquam commodo justo vitae augue faucibus, non commodo quam blandit. Mauris mi quam, ultricies vitae mi id, feugiat egestas elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie leo eu libero laoreet, nec aliquam erat varius. Morbi scelerisque elit imperdiet, luctus ante a, tristique arcu. Integer cursus dui consequat risus dapibus sagittis. Maecenas ac dignissim lacus, at luctus est.
+    </p>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-2 hidden-xs hidden-sm">
+    <div class="teaser"><img src="/assets/typo_05.gif"></div>
+  </div>
+  <div class="col-md-7 movember-text">
+    <h3>Maecenas ac dignissim lacus <%= text_logo %>?</h3>
+    <p>
+      Sed imperdiet neque eget iaculis volutpat. Vestibulum congue hendrerit libero. Cras nulla enim, luctus eu tellus vel, mattis dapibus eros. Nunc a sollicitudin erat. Suspendisse quam metus, vestibulum sit amet efficitur nec, mollis at nulla. Cras finibus tellus in purus cursus volutpat. In molestie auctor risus, faucibus mattis mi lobortis eu
+    </p>
+
+    <p>
+      Donec facilisis vestibulum dignissim. Cras sagittis pretium libero, eu feugiat purus. Vivamus venenatis ex id sapien vehicula, in eleifend mauris laoreet. Mauris nisl ex, tincidunt et justo sit amet, fringilla dictum sem. Maecenas blandit odio arcu, sit amet dignissim diam volutpat et. Fusce feugiat vehicula pulvinar. Pellentesque quis enim egestas, commodo dui fermentum, condimentum nunc. Suspendisse aliquam, nunc quis rhoncus auctor, lacus quam finibus erat, in congue dolor nibh vitae ipsum. Nunc ut lectus dolor. Donec ultrices lectus id lorem placerat auctor. Sed sit amet justo sit amet enim consequat pulvinar. Morbi ac sem sed lorem pretium ornare. Sed viverra quam nec nibh fringilla, ut convallis tortor interdum. Quisque scelerisque, augue in dignissim finibus, eros sem imperdiet nunc, eget molestie ex velit nec enim.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 hidden-xs hidden-sm">
+    <div class="teaser"><img src="/assets/typo_00.gif"></div>
+  </div>
+  <div class="col-md-7 movember-text">
+    <h3>Who are the <%= text_logo %> boys?</h3>
+
+    <% Person.all.in_groups_of(3, false).each do |row| %>
+      <div class="row">
+        <% row.each do |person| %>
+          <div class="col-md-4">
+            <div class="center">
+              <div><img src="<%= person.picture.url(:icon) %>"></div>
+              <em><%= person.display_name %></em>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.container
+  .hero-unit
+    %h1 MoVember
+    %p
+      %em
+        Vote for charity!
+        We collected € #{Vote.where(:state => 'voted').count},– already
+    
+.container
+  %h1 Please enter your voting code
+  
+  = form_tag vote_path, :method => 'get', :html => {:class => 'form-horizontal'} do
+  
+    .control-group
+      .controls
+        = text_field_tag :key
+
+    .control-group
+      .controls
+        = submit_tag 'Login'
+  

@@ -1,0 +1,45 @@
+<div ng-controller="voting_controller">
+
+  <h1>Cast a vote</h1>
+
+  <p class="lead">
+    You have 
+    <span ng-bind="user.votes_left"></span>
+    votes left
+  </p>
+
+  <div class="movember-grid">
+    <div ng-repeat="person in people">
+      <div ng-repeat="feature in features">
+
+        <div class="movember-tile">
+          <div class="movember-tile-inner light">
+            <img ng-src="{{person.preview_url}}">
+            <br />
+            <img ng-src="{{feature.preview_url}}">
+          </div>
+          <div class="text-center">
+            <em ng-bind="person.name"></em>
+          </div>
+          <div class="text-center">
+            <div>
+              <strong ng-bind="personal_votes_for(feature, person) | vote_count"></strong>
+            </div>
+
+            <button
+              class="btn btn-success btn-xs"
+              ng-click="vote(feature, person)"
+              ng-show="user.votes_left > 0"
+            >
+              vote <br />({{user.votes_left}} left)
+            </button>
+          </div>
+        </div>
+
+      </div>  
+    </div>
+
+    <div class="clearfix"></div>
+  </div>
+
+</div>

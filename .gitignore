@@ -1,0 +1,10 @@
+/config/app.yml
+/config/frontpage.html.erb
+/.bundle
+/qr.png
+
+/db/*.sqlite3
+
+/log/*.log
+/public/system/*
+/tmp

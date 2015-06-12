@@ -1,0 +1,78 @@
+<%= form_for @user, html: {"ng-controller" => "user_controller"} do |f| %>
+  
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <% @user.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :email, :class => "control-label" %>
+    <%= f.text_field :email, :type => "email", :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :amount_paid, :class => "control-label" %>
+    <%= f.number_field :amount_paid, :class => "form-control", "ng-model" => "user.amount_paid" %>
+  </div>
+
+  <%= f.fields_for :cart do |c| %>
+    <% app_config['goods'].each do |key, data| %>
+      <%= c.fields_for key.to_sym do |g| %>
+        <%= g.hidden_field :amount, :value => "{{user.cart.#{key}.amount}}" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div ng-bind="money_left()"></div>
+
+  <div class="form-group">
+    <label class="control-label">
+      What will the user do with the money?<br />
+      (The user has voted for {{money_spent() | currency:"€ "}} already)
+    </label>
+    <ul>
+      <li ng-repeat="(key, data) in available_goods()">
+        <strong ng-bind="user.cart[key].amount || 0"></strong>
+        -
+        {{data.plural_name}} à 
+        <strong>{{data.price | currency:"€ "}}
+        <div>
+          <a href="#" ng-click="more($event, key)">more</a>
+          |
+          <a href="#" ng-click="less($event, key)">less</a>
+          |
+          <a href="#" ng-click="fill_up($event, key)">fill up</a>
+          |
+          <a href="#" ng-click="empty($event, key)">empty</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :comment, :class => "control-label" %>
+    <%= f.text_area :comment, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :admin, :class => "control-label" do %>
+      <%= f.check_box :admin %>
+      Grant admin rights to this user
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :cast_randomly, :class => "control-label" do %>
+      <%= f.check_box :cast_randomly %>
+      Cast votes randomly for this user's donation
+    <% end %>
+  </div>
+
+  <%= f.submit "Save", :class => "btn btn-primary" %>
+
+  <%= f.submit "Save without notifying user", :class => "btn btn-primary"%>
+
+<% end %>

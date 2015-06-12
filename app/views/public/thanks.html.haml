@@ -1,0 +1,18 @@
+.container
+  .hero-unit
+    .logo.pull-right.hidden-phone= image_tag 'mustache.png'
+    %h1 Thank you
+
+.container.how
+  .row
+    .span8
+      .row
+        .span1.hidden-phone
+          .teaser= image_tag 'typo_00.gif', :class => 'hidden-phone'
+        .span7
+          %h1 Your vote has been received
+          %p
+            Please feel free to have a look at the preliminary results
+          %p
+            %a.btn.btn-primary{:href => '/results'} Show me the results
+            %a.btn.btn-primary{:href => '/'} To the home page

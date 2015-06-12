@@ -1,0 +1,60 @@
+<div class="jumbotron">
+  <div class="logo pull-right hidden-phone hidden-xs hidden-sm">
+    <img alt="Mustache" src="/assets/man_yelling.png">
+  </div>
+  <h1 class="hidden-xs hidden-sm">
+    <img alt="Logo" src="/assets/logo.png">
+  </h1>
+  <p>
+    <em>
+      Vote for charity!
+      We have currently collected € <%= "%.2f" % User.total_income %> 
+      towards our goal of € <%= "%.2f" % app_config["goal"] %>.
+      <% if current_user && current_user.votes_left? %>
+        and you have 
+        <strong><%= current_user.votes_left %></strong> votes left!
+      <% end %>
+    </em>
+  </p>
+  <div>
+    <% if current_user && current_user.votes_left? %>
+      <a class="btn btn-success" href="/votes/new">
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+        Alright, let me vote
+      </a>
+    <% end %>
+    <a class="btn btn-success" href="/votes">
+      <i class="glyphicon glyphicon-star"></i>
+      Take me to the results
+    </a>
+    <% unless current_user %>
+      <a 
+        class="btn btn-success" 
+        href="#"
+        role="popover"
+        data-placement="top"
+        data-trigger="click"
+        data-container="body"
+        data-title="Check your mailbox!"
+        data-html="true"
+        data-content="
+          You should have received a mail with a login link, please drop us a
+          line at <a href='mailto:schepp@ist.ac.at'>schepp@ist.ac.at</a> in case you didn't.
+          <div class='movember-button-bar'>
+            <a class='btn btn-success' href='/login'>
+              But, I have a password!
+            </a>
+          </div>
+        "
+      >
+        <i class="glyphicon glyphicon-user"></i>
+        Let me log in
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<%= render :partial => "frontpage" %>
+
+<br />
+<br />

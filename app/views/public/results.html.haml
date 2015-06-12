@@ -1,0 +1,66 @@
+.container.results
+  .hero-unit
+    .logo.pull-right.hidden-phone= image_tag 'mustache.png'
+    %h1 So ... who won?
+    %p
+      %em
+        #{Vote.where(:state => 'voted').count} votes have been done
+    
+    .pull-right
+      = link_to "Back to the home page", root_url, :class => 'btn btn-primary'
+
+.container
+  %ul.nav.nav-pills
+    %li{:class => params[:style] == 'by_combination' ? 'active' : ''}
+      = link_to "by combination", results_path(:style => 'by_combination')
+    %li{:class => params[:style] == 'by_combination' ? '' : 'active'}
+      = link_to "by person", results_path(:style => 'by_person')
+  
+  %br
+  %br
+  
+  - if params[:style] == 'by_combination'
+    .row
+      .span1.hidden-phone
+        = image_tag 'typo_09.gif', :class => 'hidden-phone'
+      .span10
+        - @by_combination.first(9).in_groups_of(3).each do |row|
+          .row
+            - row.each do |o|
+              .span3{:style => 'text-align: center'}
+                .images
+                  = image_tag o[:person].picture.url(:icon), :class => 'img-rounded'
+                  = image_tag o[:feature].picture.url(:icon), :class => 'img-rounded'
+                .count
+                  %h1
+                    = o[:count]
+                    - if o[:count] == 1
+                      vote
+                    - else
+                      votes
+                    
+      .span1.hidden-phone
+        = image_tag 'typo_08.gif', :class => 'hidden-phone'
+        
+  - else
+    - @by_person.each do |person, features|
+      .row
+        .span1.hidden-phone
+          - if person == @by_person.keys.first
+            = image_tag 'typo_09.gif', :class => 'hidden-phone'
+        .span10
+          .row
+            .span3
+              = image_tag person.picture.url(:preview), :class => 'img-rounded person'
+            
+            .span7
+              - features.each do |feature|
+                .result
+                  = image_tag feature[:feature].picture.url(:icon), :class => 'img-rounded'
+                  %h5
+                    = feature[:count]
+                    votes
+            
+        .span1.hidden-phone
+          - if person == @by_person.keys.first
+            = image_tag 'typo_08.gif', :class => 'hidden-phone'

@@ -1,0 +1,30 @@
+<h1 class="pull-left">Features</h1>
+
+<div class="pull-right movember-button-bar">
+  <%= mdv_button 'Add a new feature', new_feature_path %>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="movember-grid">
+  <% @features.each do |feature| %>
+    <div class="movember-tile">
+      <div class="movember-tile-inner light">
+        <a href="<%= edit_feature_path(feature) %>">
+          <img src="<%= feature.picture.url(:preview) %>">
+        </a>
+      </div>
+      <div class="text-center">
+        <!-- a 
+          href="<%= feature_url(feature) %>" 
+          data-method="delete" 
+          class="btn btn-success btn-xs"
+        >
+          delete
+        </a -->
+      </div>
+    </div>
+  <% end %>
+
+  <div class="clearfix"></div>
+</div>
